@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <math.h>
 #define MAX(a,b) (((a)>(b))?(a):(b))
 #define MAX_DEGREE 10
 
@@ -74,10 +75,16 @@ printf("%3.1f \n", p.coef[p.degree]);
 
 //=====================================================
 
-polynomial eval(polynomial P,int x){
-    while() {
-        
+float eval(polynomial P,int x){
+    float sum = 0;
+    int i = 0;
+    int P_degree = P.degree;
+    while(P_degree >= 0) {
+        sum = sum + P.coef[i] * pow(x,P_degree);
+        P_degree = P_degree - 1;
+        i = i+1;
     }
+    return sum;
 }
 
 
@@ -86,35 +93,56 @@ int main(void)
 {
 polynomial a;
 polynomial b;
+int num;
+float x;
 
+printf("1: 두 다항식 뺄셈\n");
+printf("2: 다항식 계산\n:");
+scanf("%d",&num);
 
-printf("첫번째 다항식 기수:");
-scanf("%d",&a.degree);
+switch(num) {
 
-for (int i=0;i<a.degree+1;i++){
+    case 1:
+
+    printf("첫번째 다항식 기수:");
+    scanf("%d",&a.degree);
+
+    for (int i=0;i<a.degree+1;i++){
     printf("첫번째 다항식 %d차항 계수:",a.degree-i);
     scanf("%f",&a.coef[i]);
+    }
+
+    printf("두번째 다항식 기수:");
+    scanf("%d",&b.degree);
+
+    for (int i=0;i<b.degree+1;i++){
+        printf("두번째 다항식 %d차항 계수:",b.degree-i);
+        scanf("%f",&b.coef[i]);
+    }
+    polynomial c;
+    print_poly(a);
+    print_poly(b);
+    c = poly_add1(a, b);
+    printf("-----------------------------------------------------------------------------\n");
+    print_poly(c);
+
+    break;
+
+    case 2:
+    printf("다항식 기수:");
+    scanf("%d",&a.degree);
+    for (int i=0; i<a.degree+1;i++){
+        printf("다항식 %d차항 계수:", a.degree - i);
+        scanf("%f",&a.coef[i]);
+    }
+    printf("x=");
+    scanf("%f",&x);
+    print_poly(a);
+    printf("x=%f\n",x);
+    printf("-----------------------------------------------------------------------------\n");
+    printf("계산결과: %.2f",eval(a,x));
+    break;
 }
-
-printf("두번째 다항식 기수:");
-scanf("%d",&b.degree);
-
-for (int i=0;i<b.degree+1;i++){
-    printf("두번째 다항식 %d차항 계수:",b.degree-i);
-    scanf("%f",&b.coef[i]);
-}
-
-
-polynomial c;
-
-print_poly(a);
-print_poly(b);
-c = poly_add1(a, b);
-
-printf("-----------------------------------------------------------------------------\n");
-
-print_poly(c);
 
 return 0;
-
 }
