@@ -39,9 +39,10 @@ degree_a--;
 
 else if (degree_a == degree_b) {  // A항 == B항
 
-C.coef[Cpos++] = A.coef[Apos++] + B.coef[Bpos++];
+C.coef[Cpos++] = A.coef[Apos++] - B.coef[Bpos++];
 
 degree_a--; degree_b--;
+
 }
 
 else { // B항 > A항
@@ -51,10 +52,14 @@ C.coef[Cpos++] = B.coef[Bpos++];
 degree_b--;
 
 }
+
 }
 
 return C;
+
 }
+
+//====================================================
 void print_poly(polynomial p)
 
 {
@@ -69,27 +74,36 @@ printf("%3.1f \n", p.coef[p.degree]);
 
 //=====================================================
 
+polynomial eval(polynomial P,int x){
+    while() {
+        
+    }
+}
+
+
+
 int main(void)
-
 {
-int a_degree = 0;
-int b_degree = 0;
-float arr_a[MAX_DEGREE];
-float arr_b[MAX_DEGREE];
-printf("첫 번째 다항식:");
-for (int i=0;i<MAX_DEGREE+1;i++){
-    scanf("%f",&arr_a[i]);
-}
-a_degree = arr_a[0];
+polynomial a;
+polynomial b;
 
-printf("두 번째 다항식:");
-for (int i = 0;i<MAX_DEGREE+1;i++){
-    scanf("%f",&arr_b[i]);
-}
-b_degree = arr_b[0];
 
-polynomial a = { a_degree, *arr_a };
-polynomial b = { b_degree, *arr_b };
+printf("첫번째 다항식 기수:");
+scanf("%d",&a.degree);
+
+for (int i=0;i<a.degree+1;i++){
+    printf("첫번째 다항식 %d차항 계수:",a.degree-i);
+    scanf("%f",&a.coef[i]);
+}
+
+printf("두번째 다항식 기수:");
+scanf("%d",&b.degree);
+
+for (int i=0;i<b.degree+1;i++){
+    printf("두번째 다항식 %d차항 계수:",b.degree-i);
+    scanf("%f",&b.coef[i]);
+}
+
 
 polynomial c;
 
